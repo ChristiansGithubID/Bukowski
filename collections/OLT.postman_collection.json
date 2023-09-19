@@ -1,0 +1,1200 @@
+{
+	"info": {
+		"_postman_id": "73c5aa03-3c9d-4077-a774-a1a7f8467ad5",
+		"name": "OLT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26644960",
+		"_collection_link": "https://sorenson.postman.co/workspace/Online-Transcription-Service-~cd1c6ed9-3ac4-431f-a2ac-717aeec0430c/collection/26644960-73c5aa03-3c9d-4077-a774-a1a7f8467ad5?action=share&source=collection_link&creator=26644960"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "getUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate the org_id field\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.org_id).to.exist.and.to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email field is not empty\", function () {\r",
+									"    const responseData = pm.response.json();    \r",
+									"    pm.expect(responseData.email).to.exist.and.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"// Test the response body structure and values\r",
+									"pm.test(\"Response body structure is valid\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON).has.property('id');\r",
+									"    pm.expect(responseJSON).has.property('org_id');\r",
+									"    pm.expect(responseJSON).has.property('user_id');\r",
+									"    pm.expect(responseJSON).has.property('email');\r",
+									"    pm.expect(responseJSON).has.property('created_dt');\r",
+									"    pm.expect(responseJSON).has.property('modified_dt');\r",
+									"    pm.expect(responseJSON).has.property('jobs');\r",
+									"});\r",
+									"\r",
+									"// Validate the id field\r",
+									"pm.test(\"Validate the id field\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.id).to.exist.and.to.be.a('number');\r",
+									"});\r",
+									"\r",
+									"// Validate the org_id field\r",
+									"pm.test(\"Validate the org_id field\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.org_id).to.exist.and.to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"// Validate user_id field\r",
+									"pm.test(\"Validate user_id field\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.user_id).to.exist.and.to.be.a('string');\r",
+									"    pm.expect(responseJSON.user_id).to.not.be.empty;\r",
+									"    pm.expect(responseJSON.user_id).to.have.lengthOf.at.least(0);\r",
+									"});\r",
+									"\r",
+									"// Email field is not empty\r",
+									"pm.test(\"Email field is not empty\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.email).to.exist.and.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"// Validate jobs array\r",
+									"pm.test(\"Validate jobs array\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.jobs).to.be.an('array');\r",
+									"\r",
+									"    responseJSON.jobs.forEach((job) => {\r",
+									"        pm.expect(job).to.have.property('id');\r",
+									"        pm.expect(job).to.have.property('job_type');\r",
+									"        pm.expect(job).to.have.property('job_id');\r",
+									"        pm.expect(job).to.have.property('user_id');\r",
+									"        pm.expect(job).to.have.property('state');\r",
+									"        pm.expect(job).to.have.property('created_dt');\r",
+									"        pm.expect(job).to.have.property('modified_dt');\r",
+									"        pm.expect(job).to.have.property('jobFiles');\r",
+									"        pm.expect(job).to.have.property('jobOptions');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Valid Date\", function(){\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.created_dt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/);\r",
+									"    pm.expect(responseJSON.modified_dt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user/12",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"qatesterNextguy\",\r\n    \"organizationId\": \"CC\",\r\n    \"email\": \"cgibbs2@sorenson.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is not empty\", function () {\r",
+									"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is within acceptable range\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response test is correct\", function () {\r",
+									"    pm.expect(pm.response.text()).to.contain(\"Update Successful\", \"Unexpected message returned\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"User22Again\",\r\n    \"organizationId\": \"CCall\",\r\n    \"email\": \"testemail@sorenson.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/22",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "getJobsByState",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an array\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Each element in the array has the required properties\", function () {\r",
+									"    pm.response.json().forEach(function (element) {\r",
+									"        pm.expect(element).to.have.property('id');\r",
+									"        pm.expect(element).to.have.property('job_type');\r",
+									"        pm.expect(element).to.have.property('job_id');\r",
+									"        pm.expect(element).to.have.property('user_id');\r",
+									"        pm.expect(element).to.have.property('state');\r",
+									"        pm.expect(element).to.have.property('created_dt');\r",
+									"        pm.expect(element).to.have.property('modified_dt');\r",
+									"        pm.expect(element).to.have.property('jobFiles');\r",
+									"        pm.expect(element).to.have.property('jobOptions');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each element in the array has the exected data type\", function () {\r",
+									"       const responseData = pm.response.json(); \r",
+									"    pm.response.json().forEach(function (element) {\r",
+									"        pm.expect(element).property(\"id\").to.be.a(\"number\");\r",
+									"    pm.expect(element).property(\"job_id\").to.not.be.empty;\r",
+									"    pm.expect(element).property(\"job_id\").length.to.be.greaterThan(20);\r",
+									"    pm.expect(element).property(\"created_dt\").to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/);\r",
+									"    pm.expect(element).property(\"modified_dt\").to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/);\r",
+									"    pm.expect(element).property(\"state\").to.be.oneOf([\"Created\", \"Ready\", \"Completed\"]);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Test to check if the response contains the Content-Type header\r",
+									"pm.test(\"Valid Content-Type header is present\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if the response contains Content-Length header\", function () {\r",
+									"    pm.response.headers.has(\"Content-Length\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/job/state/Ready",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job",
+								"state",
+								"Ready"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getJobById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is within acceptable range\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the id field is a non-negative integer\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    responseData.forEach(function (response) {\r",
+									"        pm.expect(response.id).to.be.a('number').and.to.satisfy(function (value) {\r",
+									"            return value >= 0;\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify that the job_type field is a non-empty string\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    pm.expect(responseData[0].job_type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify that the job_id field is a non-empty string\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    responseData.forEach(function (item) {\r",
+									"        pm.expect(item.job_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify that user_id is a non-negative integer\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('array').with.lengthOf(1, \"Array should have length of 1\");\r",
+									"\r",
+									"    responseData.forEach(function (item) {\r",
+									"        pm.expect(item.user_id).to.be.a('number').and.to.be.greaterThan(-1, \"user_id should be a non-negative integer\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Stores the job_id in an environment or global variable\r",
+									"var jobId = pm.response.json()[0].job_id;\r",
+									"pm.globals.set(\"jobId\", jobId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/job/23",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateJob",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with id property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with job_type property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('job_type');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with job_id property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('job_id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with user_id property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('user_id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with state property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('state');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with created_dt property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('created_dt');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with modified_dt property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('modified_dt');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is within acceptable range\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Test the response body structure and values\r",
+									"pm.test(\"Response body structure is valid\", function () {\r",
+									"    var responseJSON = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJSON).to.be.an('object');\r",
+									"    pm.expect(responseJSON).to.have.property('id');\r",
+									"    pm.expect(responseJSON).to.have.property('job_type');\r",
+									"    pm.expect(responseJSON).to.have.property('job_id');\r",
+									"    pm.expect(responseJSON).to.have.property('user_id');\r",
+									"    pm.expect(responseJSON).to.have.property('state');\r",
+									"    pm.expect(responseJSON).to.have.property('created_dt');\r",
+									"    pm.expect(responseJSON).to.have.property('modified_dt');\r",
+									"});\r",
+									"\r",
+									"// Test the data types of the properties\r",
+									"pm.test(\"Response property data types are valid\", function () {\r",
+									"    var responseJSON = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJSON.id).to.be.a('number');\r",
+									"    pm.expect(responseJSON.job_type).to.be.a('string');\r",
+									"    pm.expect(responseJSON.job_id).to.be.a('string');\r",
+									"    pm.expect(responseJSON.user_id).to.be.a('number');\r",
+									"    pm.expect(responseJSON.state).to.be.a('string');\r",
+									"    pm.expect(responseJSON.created_dt).to.be.a('string');\r",
+									"    pm.expect(responseJSON.modified_dt).to.be.a('string');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jobType\":\"Video\",\r\n    \"userId\":21\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/job",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateJob",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is empty\", function () {\r",
+									"    pm.expect(pm.response.text()).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is within acceptable range\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jobId\":\"82cd2060-6fb7-4be0-a176-afce34f23c8c\",\r\n    \"jobType\":\"Video\",\r\n    \"userId\":13,\r\n    \"state\": \"Ready\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/job/9",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"job",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetSignedUrl-Download",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"const\r",
+							"    utils = eval(globals.utils),\r",
+							"    varUtils = eval(globals.varUtils),\r",
+							"    { validator, stringify, tryParse, log } = utils\r",
+							"\r",
+							"\r",
+							"// save the GUPS Profile Id for later\r",
+							"\r",
+							"var downloadUrl = varUtils.getEnv(\"downloadURL\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"downloadURL\", jsonData.downloadURL)\r",
+							"\r",
+							"pm.test(\"Response time is within acceptable range\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.downloadURL).to.exist.and.to.be.a('string');\r",
+							"    pm.expect(responseData.fileName).to.exist.and.to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"downloadURL is a valid URL\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.downloadURL).to.be.a('string');\r",
+							"    pm.expect(responseData.downloadURL).to.match(/^https?:\\/\\/[\\w\\-]+(\\.[\\w\\-]+)+[/#?]?.*$/, \"Invalid URL format\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"fileName is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.fileName).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobId\" : \"ae858c23-6311-4835-aa84-891d7614dad7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/presigned/down/formdata/Panda.wmv",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"presigned",
+						"down",
+						"formdata",
+						"Panda.wmv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSignedUrl-Upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"const\r",
+							"    utils = eval(globals.utils),\r",
+							"    varUtils = eval(globals.varUtils),\r",
+							"    { validator, stringify, tryParse, log } = utils\r",
+							"\r",
+							"\r",
+							"// save the GUPS Profile Id for later\r",
+							"var uploadUrl = varUtils.getEnv(\"uploadUrl\")\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"varUtils.changeVariable(\"uploadUrl\", jsonData.uploadURL)\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has required fields - uploadURL and fileName\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.uploadURL).to.exist.and.to.be.a('string');\r",
+							"    pm.expect(responseData.fileName).to.exist.and.to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"uploadURL is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.uploadURL).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"fileName is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.fileName).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"uploadURL is a valid URL format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.uploadURL).to.exist.and.to.match(/^https?:\\/\\/.+$/);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobId\" : \"ae858c23-6311-4835-aa84-891d7614dad7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/presigned/up/formdata/TrySomething30Days.mp4",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"presigned",
+						"up",
+						"formdata",
+						"TrySomething30Days.mp4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put-FileInS3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/lbleak/Desktop/AV Files/trysomething30days.mp4"
+					}
+				},
+				"url": {
+					"raw": "{{uploadUrl}}",
+					"host": [
+						"{{uploadUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get File From S3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{downloadURL}}",
+					"host": [
+						"{{downloadURL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserPartDeux",
+			"item": [
+				{
+					"name": "getUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate the org_id field\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.org_id).to.exist.and.to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email field is not empty\", function () {\r",
+									"    const responseData = pm.response.json();    \r",
+									"    pm.expect(responseData.email).to.exist.and.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"// Test the response body structure and values\r",
+									"pm.test(\"Response body structure is valid\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON).has.property('id');\r",
+									"    pm.expect(responseJSON).has.property('org_id');\r",
+									"    pm.expect(responseJSON).has.property('user_id');\r",
+									"    pm.expect(responseJSON).has.property('email');\r",
+									"    pm.expect(responseJSON).has.property('created_dt');\r",
+									"    pm.expect(responseJSON).has.property('modified_dt');\r",
+									"    pm.expect(responseJSON).has.property('jobs');\r",
+									"});\r",
+									"\r",
+									"// Validate the id field\r",
+									"pm.test(\"Validate the id field\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.id).to.exist.and.to.be.a('number');\r",
+									"});\r",
+									"\r",
+									"// Validate the org_id field\r",
+									"pm.test(\"Validate the org_id field\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.org_id).to.exist.and.to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"// Validate user_id field\r",
+									"pm.test(\"Validate user_id field\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.user_id).to.exist.and.to.be.a('string');\r",
+									"    pm.expect(responseJSON.user_id).to.not.be.empty;\r",
+									"    pm.expect(responseJSON.user_id).to.have.lengthOf.at.least(0);\r",
+									"});\r",
+									"\r",
+									"// Email field is not empty\r",
+									"pm.test(\"Email field is not empty\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.email).to.exist.and.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"// Validate jobs array\r",
+									"pm.test(\"Validate jobs array\", function () {\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.jobs).to.be.an('array');\r",
+									"\r",
+									"    responseJSON.jobs.forEach((job) => {\r",
+									"        pm.expect(job).to.have.property('id');\r",
+									"        pm.expect(job).to.have.property('job_type');\r",
+									"        pm.expect(job).to.have.property('job_id');\r",
+									"        pm.expect(job).to.have.property('user_id');\r",
+									"        pm.expect(job).to.have.property('state');\r",
+									"        pm.expect(job).to.have.property('created_dt');\r",
+									"        pm.expect(job).to.have.property('modified_dt');\r",
+									"        pm.expect(job).to.have.property('jobFiles');\r",
+									"        pm.expect(job).to.have.property('jobOptions');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Valid Date\", function(){\r",
+									"    const responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON.created_dt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/);\r",
+									"    pm.expect(responseJSON.modified_dt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user/12",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"qatesterNextguy\",\r\n    \"organizationId\": \"CC\",\r\n    \"email\": \"cgibbs2@sorenson.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is not empty\", function () {\r",
+									"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is within acceptable range\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response test is correct\", function () {\r",
+									"    pm.expect(pm.response.text()).to.contain(\"Update Successful\", \"Unexpected message returned\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"User22Again\",\r\n    \"organizationId\": \"CCall\",\r\n    \"email\": \"testemail@sorenson.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/22",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post YT FIle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is not empty\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 3 seconds\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is not null\", function () {\r",
+							"    const responseBody = pm.response.text();\r",
+							"\r",
+							"    pm.expect(responseBody).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check for correct response message\", function(){\r",
+							"    const responseBody = pm.response.text();\r",
+							"    pm.expect(responseBody).to.be(\"Processing complete successfully\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://e23gjmw9bk.execute-api.us-west-2.amazonaws.com/newdev/youtube/dbd0c73f-055f-4g23-bf9c-5c831b445837_NewTest/sqSA-SY5Hro",
+					"protocol": "https",
+					"host": [
+						"e23gjmw9bk",
+						"execute-api",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"newdev",
+						"youtube",
+						"dbd0c73f-055f-4g23-bf9c-5c831b445837_NewTest",
+						"sqSA-SY5Hro"
+					],
+					"query": [
+						{
+							"key": "ContentType",
+							"value": "Multipart",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Token Not Empty\",function(){\r",
+							"    const reply = pm.response.text();\r",
+							"    pm.expect(reply).length.to.be.greaterThan(1000);\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"200 Reply\", function(){\r",
+							"        const respStatus = pm.response.status;\r",
+							"        pm.expect(respStatus).to.contain(\"OK\");\r",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"z_cart_testuser@ccindeo.com\",\r\n    \"Password\": \"6H4uH7iwU2pafUy9i245bA7!!zUhE3\",\r\n    \"TenantId\": \"d0f7f33f-8d1f-4ac0-bccd-2ecda8bf422b\",  \r\n    \"ClientId\": \"ca7114f2-d398-45aa-9f55-ed654f74c06f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://authbypassapi.azurewebsites.net/authorize/token",
+					"protocol": "https",
+					"host": [
+						"authbypassapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"authorize",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calling Savvy",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "CS3JHw7Xfx6fPprg880qq3y4awJDWGKH9wvOaHrg",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Pre-Signed-Url",
+						"value": "{{downloadURL}}",
+						"type": "text"
+					},
+					{
+						"key": "Callback-Url",
+						"value": "https://callback/xxxx",
+						"type": "text"
+					},
+					{
+						"key": "File-Name",
+						"value": "newsarticle-savvy.wav",
+						"type": "text"
+					},
+					{
+						"key": "Cust-Id",
+						"value": "test-user",
+						"type": "text"
+					},
+					{
+						"key": "Asrs",
+						"value": "microsoft",
+						"type": "text"
+					},
+					{
+						"key": "Transcript-Format",
+						"value": "json",
+						"type": "text"
+					},
+					{
+						"key": "Input-Language",
+						"value": "en-US",
+						"type": "text"
+					},
+					{
+						"key": "Transcript-Pre-Signed-Url",
+						"value": "{{uploadUrl}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://staging.savvy-batch.sorensoncloud.com/file",
+					"protocol": "https",
+					"host": [
+						"staging",
+						"savvy-batch",
+						"sorensoncloud",
+						"com"
+					],
+					"path": [
+						"file"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

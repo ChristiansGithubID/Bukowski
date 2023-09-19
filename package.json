@@ -1,0 +1,31 @@
+{
+  "name": "bukowski",
+  "version": "0.7.0",
+  "description": "It does stuff",
+  "main": "bukowski.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristiansGithubID/Bukowski.git"
+  },
+  "keywords": [
+    "postman",
+    "playwright"
+  ],
+  "author": "Christian Gibbs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristiansGithubID/Bukowski/issues"
+  },
+  "homepage": "https://github.com/ChristiansGithubID/Bukowski#readme",
+  "dependencies": {
+    "@types/node": "^20.6.0",
+    "@types/postman-collection": "^3.5.7",
+    "faker": "^6.6.6",
+    "postman-code-generators": "^1.8.0",
+    "postman-collection": "^4.2.1",
+    "typescript": "^5.2.2"
+  }
+}
